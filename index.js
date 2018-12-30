@@ -1,14 +1,5 @@
 'use strict';
 
-/**
- * This sample demonstrates a simple skill built with the Amazon Alexa Skills Kit.
- * The Intent Schema, Custom Slots, and Sample Utterances for this skill, as well as
- * testing instructions are located at http://amzn.to/1LzFrj6
- *
- * For additional samples, visit the Alexa Skills Kit Getting Started guide at
- * http://amzn.to/1LGWsLG
- */
-
 
 // --------------- Helpers that build all of the responses -----------------------
 
@@ -104,11 +95,9 @@ function showCard(sessionAttributes, title, content, reprompt, exit, callback) {
 function onIntent(intentRequest, session, callback) {
     console.log(`onIntent requestId=${intentRequest.requestId}, sessionId=${session.sessionId}`);
 
-    const intent = intentRequest.intent;
     const intentName = intentRequest.intent.name;
 
-    // todo: fix this ugly if statement
-    // todo: store dates as timestamps in external file and get dynamically
+    // todo: fix this ugly-ass code
     if (intentName === 'assess_start_date') {
         showCard({}, "Assess Start Date", "Cyberstart Assess Started on the 6th of November.", "", true, callback);
     } else if (intentName === 'assess_end_date') {
@@ -126,11 +115,11 @@ function onIntent(intentRequest, session, callback) {
     } else if (intentName === 'AMAZON.StopIntent' || intentName === 'AMAZON.CancelIntent') {
         handleSessionEndRequest(callback);
     } else if (intentName === 'elite_dates') {
-        showCard({}, "Cyberstart Elite Dates", "Cyberstart Elite Dates are still to be confirmed. Check back later!", "", true, callback)
+        showCard({}, "Cyberstart Elite Dates", "Cyberstart Elite Dates are still to be confirmed. Check back later!", "", true, callback);
     } else if (intentName === 'get_tip') {
         giveTip(callback);
     } else if (intentName === 'no_deobfuscation') {
-        showCard({}, "Deobfuscation", "Deobfuscation shouldn't be attempted unless the challenge states you should.", "", true, callback)
+        showCard({}, "Deobfuscation", "Deobfuscation shouldn't be attempted unless the challenge states you should.", "", true, callback);
     } else {
         throw new Error('Invalid intent');
     }
@@ -153,6 +142,16 @@ function onSessionEnded(sessionEndedRequest, session) {
 exports.handler = (event, context, callback) => {
     try {
         console.log(`event.session.application.applicationId=${event.session.application.applicationId}`);
+
+        /**
+         * Uncomment this if statement and populate with your skill's application ID to
+         * prevent someone else from configuring a skill that sends requests to this function.
+         */
+        /*
+        if (event.session.application.applicationId !== 'amzn1.echo-sdk-ams.app.[unique-value-here]') {
+             callback('Invalid Application ID');
+        }
+        */
 
         if (event.session.new) {
             onSessionStarted({ requestId: event.request.requestId }, event.session);

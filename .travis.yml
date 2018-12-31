@@ -1,0 +1,11 @@
+language: node_js
+
+deploy:
+  provider: lambda
+  function_name: "cyberdiscAlexaSkill"
+  region: "eu-west-1"
+  role: "arn:aws:iam::740565504434:role/service-role/testrole"
+  runtime: "nodejs6.10"
+  handler_name: "handler"
+  on:
+    branch: master

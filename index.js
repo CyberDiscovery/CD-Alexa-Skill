@@ -101,11 +101,9 @@ function onIntent(intentRequest, session, callback) {
         case 'assess_start_date':
             showCard({}, "Assess Start Date", "Cyberstart Assess Started on the 6th of November.", "", true, callback);
             break;
-
         case 'Assess End Date':
             showCard({}, "Assess End Date", "Cyberstart Assess Ends on the 7th of January.", "", true, callback);
             break;
-
         case 'game_start_date':
             showCard({}, "Game Start Date", "Cyberstart Game Starts on the 15th of January.", "", true, callback);
             break;

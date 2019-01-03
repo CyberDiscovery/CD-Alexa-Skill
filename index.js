@@ -92,8 +92,8 @@ function giveTip(callback) {
     callback({}, buildSpeechletResponse("Tip", `Your tip is: "${tip}"! Good luck with the challenge!`, "", true));
 }
 
-function onIntent(intentRequest, session, callback) {
-    console.log(`onIntent requestId=${intentRequest.requestId}, sessionId=${session.sessionId}`);
+exports.onIntent = function(intentRequest, session, callback) {
+    console.log(`exports.onIntent requestId=${intentRequest.requestId}, sessionId=${session.sessionId}`);
 
     const intentName = intentRequest.intent.name;
 
@@ -172,7 +172,7 @@ exports.handler = (event, context, callback) => {
                     callback(null, buildResponse(sessionAttributes, speechletResponse));
                 });
         } else if (event.request.type === 'IntentRequest') {
-            onIntent(event.request,
+            exports.onIntent(event.request,
                 event.session,
                 (sessionAttributes, speechletResponse) => {
                     callback(null, buildResponse(sessionAttributes, speechletResponse));

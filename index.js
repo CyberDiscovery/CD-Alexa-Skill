@@ -85,46 +85,56 @@ function showCard(sessionAttributes, title, content, reprompt, exit, callback) {
 /**
  * Called when the user specifies an intent for this skill.
  */
- 
- function giveTip(callback) {
+
+function giveTip(callback) {
     var tips = ["Don't be afraid to read over the source again!", "Using an unconvential approach is ok!", "Did you check server configuration files that might exist?", "Check file extensions!", "The developer console often helps.", "Have you looked at cookies?", "Maybe trying random inputs until it works is the way to go."];
     var tip = tips[Math.floor(Math.random()*tips.length)];
     callback({}, buildSpeechletResponse("Tip", `Your tip is: "${tip}"! Good luck with the challenge!`, "", true));
 }
- 
+
 function onIntent(intentRequest, session, callback) {
     console.log(`onIntent requestId=${intentRequest.requestId}, sessionId=${session.sessionId}`);
 
     const intentName = intentRequest.intent.name;
 
-    // todo: fix this ugly-ass code
-    if (intentName === 'assess_start_date') {
-        showCard({}, "Assess Start Date", "Cyberstart Assess Started on the 6th of November.", "", true, callback);
-    } else if (intentName === 'assess_end_date') {
-        showCard({}, "Assess End Date", "Cyberstart Assess Ends on the 7th of January.", "", true, callback);
-    } else if (intentName === 'game_start_date') {
-        showCard({}, "Game Start Date", "Cyberstart Game Starts on the 15th of January.", "", true, callback);
-    } else if (intentName === 'game_end_date') {
-        showCard({}, "Game End Date", "Cyberstart Game Ends on the 18th of March.", "", true, callback);
-    } else if (intentName === 'essentials_start_date') {
-        showCard({}, "Essentials Start Date", "Cyberstart Essentials Starts on the 5th of March.", "", true, callback);
-    } else if (intentName === 'essentials_end_date') {
-        showCard({}, "Essentials End Date", "Cyberstart Essentials Ends on the 29th of April.", "", true, callback);
-    } else if (intentName === 'AMAZON.HelpIntent') {
-        getWelcomeResponse(callback);
-    } else if (intentName === 'AMAZON.StopIntent' || intentName === 'AMAZON.CancelIntent') {
-        handleSessionEndRequest(callback);
-    } else if (intentName === 'elite_dates') {
-        showCard({}, "Cyberstart Elite Dates", "Cyberstart Elite Dates are still to be confirmed. Check back later!", "", true, callback);
-    } else if (intentName === 'get_tip') {
-        giveTip(callback);
-    } else if (intentName === 'no_deobfuscation') {
-        showCard({}, "Deobfuscation", "Deobfuscation shouldn't be attempted unless the challenge states you should.", "", true, callback);
-    } else {
-        throw new Error('Invalid intent');
+    switch (intentName) {
+        case 'assess_start_date':
+            showCard({}, "Assess Start Date", "Cyberstart Assess Started on the 6th of November.", "", true, callback);
+            break;
+
+        case 'Assess End Date':
+            showCard({}, "Assess End Date", "Cyberstart Assess Ends on the 7th of January.", "", true, callback);
+            break;
+
+        case 'game_start_date':
+            showCard({}, "Game Start Date", "Cyberstart Game Starts on the 15th of January.", "", true, callback);
+            break;
+        case 'essentials_start_date':
+            showCard({}, "Essentials Start Date", "Cyberstart Essentials Starts on the 5th of March.", "", true, callback);
+            break;
+        case 'essentials_end_date':
+            showCard({}, "Essentials End Date", "Cyberstart Essentials Ends on the 29th of April.", "", true, callback);
+            break;
+        case 'AMAZON.HelpIntent':
+            getWelcomeResponse(callback);
+            break;
+        case 'AMAZON.StopIntent':
+        case 'AMAZON.CancelIntent':
+            handleSessionEndRequest(callback);
+            break;
+        case 'elite_dates':
+            showCard({}, "Cyberstart Elite Dates", "Cyberstart Elite Dates are still to be confirmed. Check back later!", "", true, callback);
+            break;
+        case 'get_tip':
+            giveTip(callback);
+            break;
+        case 'no_deobfuscation':
+            showCard({}, "Deobfuscation", "Deobfuscation shouldn't be attempted unless the challenge states you should.", "", true, callback);
+            break;
+        default :
+            throw new Error('Invalid intent');
     }
 }
-
 /**
  * Called when the user ends the session.
  * Is not called when the skill returns shouldEndSession=true.

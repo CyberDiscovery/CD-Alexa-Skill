@@ -99,19 +99,19 @@ function onIntent(intentRequest, session, callback) {
 
     switch (intentName) {
         case 'assess_start_date':
-            showCard({}, "Assess Start Date", "Cyberstart Assess Started on the 6th of November.", "", true, callback);
+            showCard({}, "Assess Start Date", "Cyberstart Assess Started on the 2nd of June.", "", true, callback);
             break;
         case 'Assess End Date':
-            showCard({}, "Assess End Date", "Cyberstart Assess Ends on the 7th of January.", "", true, callback);
+            showCard({}, "Assess End Date", "Cyberstart Assess Ends on the 30th of September.", "", true, callback);
             break;
         case 'game_start_date':
-            showCard({}, "Game Start Date", "Cyberstart Game Starts on the 15th of January.", "", true, callback);
+            showCard({}, "Game Start Date", "Cyberstart Game Started on the 2nd of June.", "", true, callback);
             break;
         case 'essentials_start_date':
-            showCard({}, "Essentials Start Date", "Cyberstart Essentials Starts on the 5th of March.", "", true, callback);
+            showCard({}, "Essentials Start Date", "Cyberstart Essentials Starts on the 15th of September.", "", true, callback);
             break;
         case 'essentials_end_date':
-            showCard({}, "Essentials End Date", "Cyberstart Essentials Ends on the 29th of April.", "", true, callback);
+            showCard({}, "Essentials End Date", "Cyberstart Essentials Ends on the 31st of March.", "", true, callback);
             break;
         case 'AMAZON.HelpIntent':
             getWelcomeResponse(callback);
@@ -121,7 +121,7 @@ function onIntent(intentRequest, session, callback) {
             handleSessionEndRequest(callback);
             break;
         case 'elite_dates':
-            showCard({}, "Cyberstart Elite Dates", "Cyberstart Elite Dates are still to be confirmed. Check back later!", "", true, callback);
+            showCard({}, "Cyberstart Elite Dates", "Cyberstart Elite Dates for Year 3 of the program are on the Mondays, Wednesdays and Fridays from 27th July to 7th August 2020 for younger elite qualifiers.For the older elite participants, elite runs on every weekday from 27th July to &th August 2020. On the 8th August 2020, there is a Elite CTF running from 9am to 5pm, for both age groups.", "", true, callback);
             break;
         case 'get_tip':
             giveTip(callback);

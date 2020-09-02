@@ -1,3 +1,8 @@
-  {
-  "test": "return true;"
+{
+  "scripts": {
+	  "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
   }
+}
